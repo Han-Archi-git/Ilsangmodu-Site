@@ -1,0 +1,205 @@
+
+import { BlogPost, ProjectCategory } from './types';
+
+// ==============================================================================
+// [소셜 미디어 및 외부 채널 설정]
+// ==============================================================================
+export const NAVER_BLOG_ID = 'ilsangmodu';
+export const INSTAGRAM_URL = 'https://www.instagram.com/ilsang.modu/';
+export const YOUTUBE_URL = ''; // 유튜브 없음
+
+// ==============================================================================
+// [수동 데이터 입력 가이드]
+// ==============================================================================
+
+// Helper to generate consistent random images
+const getImg = (id: number, width: number, height: number) =>
+  `https://picsum.photos/id/${id}/${width}/${height}`;
+
+export const MOCK_BLOG_POSTS: BlogPost[] = [
+  // --- PLAN (계획안) - 5 Items ---
+  {
+    id: 'p1',
+    title: '성수동 카페 인테리어 계획안 - "도심 속 갤러리"',
+    summary: '미니멀한 감성과 따뜻한 우드 톤이 어우러진 카페 인테리어 계획안입니다.',
+    content: '<p>제주도의 바람과 돌, 바다를 형상화한 단독주택 계획안입니다. 중정형 배치를 통해 프라이버시를 확보하였습니다.</p>',
+    thumbnailUrl: getImg(10, 800, 600),
+    images: [getImg(10, 800, 600), getImg(11, 800, 600)],
+    date: '2024.03.15',
+    category: ProjectCategory.PLAN,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['제주건축', '단독주택', '계획안'],
+  },
+  {
+    id: 'p2',
+    title: '성수동 복합문화공간 리노베이션 계획안',
+    summary: '붉은 벽돌의 공장을 재생하여 갤러리와 오피스가 어우러지는 공간으로 재탄생시킵니다.',
+    content: '<p>성수동의 지역성을 보존하면서 현대적인 금속 디테일을 추가한 재생 건축 프로젝트입니다.</p>',
+    thumbnailUrl: getImg(94, 800, 600),
+    images: [getImg(94, 800, 600)],
+    date: '2024.02.10',
+    category: ProjectCategory.PLAN,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['도시재생', '성수동', '문화공간'],
+  },
+  {
+    id: 'p3',
+    title: '강릉 경포대 오션뷰 호텔 계획안',
+    summary: '동해의 수평선을 모티브로 한 리조트형 호텔입니다. 전 객실 테라스 설계를 적용하였습니다.',
+    content: '<p>수평적 매스가 강조된 호텔 계획안으로, 자연 경관과의 조화를 최우선으로 하였습니다.</p>',
+    thumbnailUrl: getImg(203, 800, 600),
+    images: [getImg(203, 800, 600), getImg(204, 800, 600)],
+    date: '2024.01.20',
+    category: ProjectCategory.PLAN,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['호텔설계', '강릉', '리조트'],
+  },
+  {
+    id: 'p4',
+    title: '양평 수변 빌라 단지 계획안',
+    summary: '북한강의 풍경을 모든 가구에서 즐길 수 있도록 경사지를 활용한 계단식 배치입니다.',
+    content: '<p>자연 지형을 훼손하지 않고 순응하는 형태의 고급 빌라 단지 계획안입니다.</p>',
+    thumbnailUrl: getImg(122, 800, 600),
+    images: [getImg(122, 800, 600)],
+    date: '2023.12.05',
+    category: ProjectCategory.PLAN,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['양평', '타운하우스', '계획안'],
+  },
+  {
+    id: 'p5',
+    title: '세종시 미래형 공공 도서관 공모안',
+    summary: '열린 지식을 상징하는 투명한 박스 형태의 도서관으로, 시민들의 거실 역할을 수행합니다.',
+    content: '<p>가변형 서가와 대규모 아트리움을 통해 소통하는 공간을 지향하는 도서관 계획입니다.</p>',
+    thumbnailUrl: getImg(160, 800, 600),
+    images: [getImg(160, 800, 600)],
+    date: '2023.11.12',
+    category: ProjectCategory.PLAN,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['공공건축', '도서관', '공모안'],
+  },
+
+  // --- CONSTRUCTION (공사중) - 5 Items ---
+  {
+    id: 'c1',
+    title: '남양주 스테이 "별숲" 신축공사 현장',
+    summary: '골조 공사가 완료되고 내외장재 마감 공사가 한창 진행 중인 스테이 현장입니다.',
+    content: '<p>숲속에 위치한 감성 스테이 프로젝트로, 현재 목공사와 금속 창호 공사가 병행되고 있습니다.</p>',
+    thumbnailUrl: getImg(20, 800, 600),
+    images: [getImg(20, 800, 600), getImg(21, 800, 600)],
+    date: '2024.03.28',
+    category: ProjectCategory.CONSTRUCTION,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['현장소식', '남양주', '스테이'],
+  },
+  {
+    id: 'c2',
+    title: '서초동 오피스 빌딩 "The Cube" 지하층 공사',
+    summary: '도심지 대규모 오피스 빌딩의 기초 보강 및 지하 구조물 공사 현황입니다.',
+    content: '<p>철저한 안전 관리 하에 흙막이 공사 후 기초 콘크리트 타설을 준비 중입니다.</p>',
+    thumbnailUrl: getImg(42, 800, 600),
+    images: [getImg(42, 800, 600)],
+    date: '2024.02.25',
+    category: ProjectCategory.CONSTRUCTION,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['오피스빌딩', '서초동', '공사중'],
+  },
+  {
+    id: 'c3',
+    title: '부산 해운대 근생 시설 철골조 조립',
+    summary: '바다를 마주한 독특한 곡선형 외관을 구현하기 위한 정밀 철골 공사 과정입니다.',
+    content: '<p>곡면 유리 시스템 창호를 설치하기 위한 고난도의 철골 프레임 작업이 진행되고 있습니다.</p>',
+    thumbnailUrl: getImg(145, 800, 600),
+    images: [getImg(145, 800, 600)],
+    date: '2024.01.15',
+    category: ProjectCategory.CONSTRUCTION,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['해운대', '상가건축', '철골조'],
+  },
+  {
+    id: 'c4',
+    title: '용인 수지 단독주택 외벽 조적 공사',
+    summary: '그레이 톤의 롱브릭을 활용한 외벽 마감이 진행되고 있습니다. 디테일이 살아있는 현장입니다.',
+    content: '<p>벽돌 한 장 한 장의 간격을 맞추는 정밀한 조적 작업이 마무리 단계에 접어들었습니다.</p>',
+    thumbnailUrl: getImg(175, 800, 600),
+    images: [getImg(175, 800, 600)],
+    date: '2023.12.20',
+    category: ProjectCategory.CONSTRUCTION,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['단독주택', '벽돌집', '현장관리'],
+  },
+  {
+    id: 'c5',
+    title: '대전 바이오 연구센터 설비 및 단열공사',
+    summary: '연구 시설의 특수성을 고려한 정밀 공조 설비 및 고성능 단열재 시공 중입니다.',
+    content: '<p>클린룸 설비와 복잡한 배관 시스템을 체계적으로 배치하는 고난도 공정입니다.</p>',
+    thumbnailUrl: getImg(192, 800, 600),
+    images: [getImg(192, 800, 600)],
+    date: '2023.11.30',
+    category: ProjectCategory.CONSTRUCTION,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['연구소', '특수건축', '공사현장'],
+  },
+
+  // --- COMPLETED (완공) - 5 Items ---
+  {
+    id: 'f1',
+    title: '판교 운중동 타운하우스 "The Cloud" 완공',
+    summary: '구름 위에 떠있는 듯한 캔틸레버 구조의 매스가 돋보이는 주택이 준공되었습니다.',
+    content: '<p>백색 매스와 대형 통유리가 조화를 이루는 판교 프로젝트의 최종 완성 모습입니다.</p>',
+    thumbnailUrl: getImg(56, 800, 600),
+    images: [getImg(56, 800, 600), getImg(58, 800, 600), getImg(62, 800, 600)],
+    date: '2024.03.10',
+    category: ProjectCategory.COMPLETED,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['판교주택', '고급주택', '완공사진'],
+  },
+  {
+    id: 'f2',
+    title: '청담동 갤러리 "White Canvas" 준공',
+    summary: '도심 속 예술을 담는 그릇으로 설계된 미니멀한 화이트 갤러리가 문을 열었습니다.',
+    content: '<p>내부 노출콘크리트와 화이트 큐브의 조화를 통해 작품에 집중할 수 있는 공간을 연출했습니다.</p>',
+    thumbnailUrl: getImg(180, 800, 600),
+    images: [getImg(180, 800, 600), getImg(181, 800, 600)],
+    date: '2024.02.05',
+    category: ProjectCategory.COMPLETED,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['갤러리', '청담동', '미니멀디자인'],
+  },
+  {
+    id: 'f3',
+    title: '일산 복합 주거 빌딩 "Urban Nest"',
+    summary: '상업시설과 주거공간이 입체적으로 어우러진 주상복합 건물이 완성되었습니다.',
+    content: '<p>옥상 정원과 수직적인 파사드 디자인이 돋보이는 일산의 새로운 랜드마크입니다.</p>',
+    thumbnailUrl: getImg(231, 800, 600),
+    images: [getImg(231, 800, 600)],
+    date: '2024.01.08',
+    category: ProjectCategory.COMPLETED,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['주상복합', '일산건축', '준공'],
+  },
+  {
+    id: 'f4',
+    title: '가평 숲속 펜션 "Nature Escape"',
+    summary: '나무들 사이로 자연스럽게 배치된 단독형 빌라 5개 동이 모두 완공되었습니다.',
+    content: '<p>목재 데크와 따뜻한 조명이 어우러져 자연 속 진정한 휴식을 제공하는 공간입니다.</p>',
+    thumbnailUrl: getImg(247, 800, 600),
+    images: [getImg(247, 800, 600)],
+    date: '2023.12.15',
+    category: ProjectCategory.COMPLETED,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['가평펜션', '휴양건축', '완공'],
+  },
+  {
+    id: 'f5',
+    title: '송도 컨벤션홀 "Eco Hall" 준공식',
+    summary: '친환경 에너지 시스템을 도입한 대규모 집회 시설이 성공적으로 준공되었습니다.',
+    content: '<p>태양광 패널을 디자인 요소로 승화시킨 지속 가능한 건축의 사례입니다.</p>',
+    thumbnailUrl: getImg(250, 800, 600),
+    images: [getImg(250, 800, 600)],
+    date: '2023.11.20',
+    category: ProjectCategory.COMPLETED,
+    naverUrl: 'https://blog.naver.com',
+    tags: ['친환경건축', '컨벤션홀', '송도'],
+  },
+];
