@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { COLLABORATING_PARTNERS } from './Partners';
 import { NAVER_BLOG_ID, INSTAGRAM_URL, YOUTUBE_URL } from '../constants';
 
 const Footer: React.FC = () => {
@@ -9,11 +10,16 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-start">
           <div className="mb-8 md:mb-0">
             <div className="flex flex-col gap-0.5 mb-4">
-              <h3 className="text-white text-xl font-bold tracking-tight">일상모두 디자인스튜디오</h3>
-              <h3 className="text-white text-xl font-light tracking-tight">STA종합건설</h3>
+              <h3 className="text-white text-xl font-bold tracking-tight">일상모두 DESIGN STUDIO</h3>
               <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-[0.2em] mt-2">Total Design & Build Solution</p>
             </div>
-            <p className="text-sm font-light text-neutral-700">디자인의 가치와 시공의 전문성을 결합한 프리미엄 건축 파트너</p>
+            <p className="text-sm font-light text-neutral-500">공간의 기획부터 디자인, 완성까지 함께합니다.</p>
+            <div className="mt-6 pt-5 border-t border-neutral-800">
+              <p className="text-[10px] tracking-widest text-neutral-600 mb-3">협력사</p>
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-xs text-neutral-400">
+                {COLLABORATING_PARTNERS.map(partner => <span key={partner.name}>{partner.name}</span>)}
+              </div>
+            </div>
           </div>
 
           {/* Social Icons with Brand Colors */}
@@ -77,7 +83,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mt-12 border-t border-neutral-900 pt-8 text-xs text-neutral-700 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p>&copy; {new Date().getFullYear()} Ilsangmodu x STA Construction. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Ilsangmodu Design Studio. All rights reserved.</p>
           <p className="hidden md:block">Designed by Archilog</p>
         </div>
       </div>

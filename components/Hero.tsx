@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown } from 'lucide-react';
+import Partners from './Partners';
 
 interface HeroProps {
   onScrollDown: () => void;
@@ -7,7 +7,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onScrollDown }) => {
   return (
-    <section id="hero" className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-neutral-950">
+    <section id="hero" className="relative min-h-[860px] h-[100svh] md:min-h-[820px] w-full flex items-center justify-center overflow-hidden bg-neutral-950">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -25,22 +25,22 @@ const Hero: React.FC<HeroProps> = ({ onScrollDown }) => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+      <div className="relative z-10 text-center px-6 pt-24 pb-24 w-full max-w-6xl mx-auto">
         {/* Badge-like accent */}
-        <div className="inline-block mb-10">
+        <div className="inline-block mb-8">
           <span className="px-5 py-2 border border-white/20 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase text-white/80 backdrop-blur-sm">
             ARCHITECTURE · INTERIOR · REMODELING
           </span>
         </div>
 
         {/* Main Copy */}
-        <h1 className="text-4xl sm:text-6xl md:text-[5rem] lg:text-[6.5rem] font-bold leading-[1.1] mb-12 tracking-tight text-white mix-blend-overlay opacity-90">
-          일상모두<span className="font-light block sm:inline"> 디자인스튜디오</span><br />
-          <span className="font-light text-white/70">STA종합건설</span>
+        <h1 className="font-bold leading-[1.15] mb-8 tracking-tight text-white">
+          <span className="block text-5xl sm:text-7xl md:text-[6.5rem] lg:text-[7.5rem]">일상모두</span>
+          <span className="block mt-4 text-2xl sm:text-4xl md:text-5xl font-light tracking-[0.15em]">DESIGN STUDIO</span>
         </h1>
 
         {/* Sub Copy */}
-        <p className="text-sm md:text-lg font-light text-neutral-300 mb-16 max-w-2xl mx-auto leading-[1.8] tracking-wide">
+        <p className="text-sm md:text-lg font-light text-neutral-300 mb-10 max-w-2xl mx-auto leading-[1.8] tracking-wide">
           공간 그 이상의 가치,<br className="md:hidden" />
           당신의 일상을 아름답게 디자인합니다.
         </p>
@@ -65,10 +65,13 @@ const Hero: React.FC<HeroProps> = ({ onScrollDown }) => {
             ABOUT US
           </button>
         </div>
+        <div className="mt-10 md:mt-12">
+          <Partners tone="dark" />
+        </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 hidden md:block">
         <button
           onClick={onScrollDown}
           className="flex flex-col items-center gap-4 text-white/30 hover:text-white transition-colors duration-500"

@@ -91,8 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => {
             />
           </div>
           <div className={`flex flex-col ${textClasses}`}>
-            <span className="text-xs md:text-sm font-bold tracking-tight leading-tight">일상모두 디자인스튜디오</span>
-            <span className="text-xs md:text-sm font-normal tracking-tight leading-tight">STA종합건설</span>
+            <span className="text-xs md:text-sm font-bold tracking-tight leading-tight">일상모두 DESIGN STUDIO</span>
           </div>
         </div>
 

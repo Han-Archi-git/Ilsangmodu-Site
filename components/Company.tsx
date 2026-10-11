@@ -1,4 +1,5 @@
 import React from 'react';
+import Partners from './Partners';
 
 const Company: React.FC = () => {
   return (
@@ -22,8 +23,8 @@ const Company: React.FC = () => {
             <div className="space-y-8 text-neutral-600 font-light leading-relaxed text-sm md:text-base">
               <p>
                 좋은 공간은 기술만으론 만들어지지 않습니다.<br />
-                <strong>일상모두</strong>의 감각적인 디자인과 <strong>STA종합건설</strong>의 정밀한 시공이 만나<br />
-                디자인부터 시공까지 전 과정을 원스톱으로 책임집니다.
+                <strong>일상모두 DESIGN STUDIO</strong>는 공간의 기획과 인테리어 디자인을 중심으로,<br />
+                전문 협력사와 함께 건축설계·인허가·시공까지 연결합니다.
               </p>
               <p>
                 단순히 건물을 짓는 것을 넘어, 시간이 지나도 변함없이<br />
@@ -55,7 +56,7 @@ const Company: React.FC = () => {
                 <h3 className="text-xl font-bold mb-2 text-black">Premium Build</h3>
                 <p className="text-sm text-neutral-500 leading-relaxed mb-1">
                   오랜 경험과 원칙을 바탕으로 기본에 충실한<br />
-                  STA종합건설의 정밀하고 안전한 시공 시스템입니다.
+                  협력사와 함께 정밀하고 안전한 시공을 이어갑니다.
                 </p>
                 <div className="w-6 h-[1px] bg-black mt-4"></div>
               </div>
@@ -77,6 +78,9 @@ const Company: React.FC = () => {
             <div className="absolute -top-8 -right-8 w-40 h-40 border border-neutral-200 z-10 hidden lg:block" />
           </div>
 
+        </div>
+        <div className="mt-24 pt-10 border-t border-neutral-200 max-w-3xl">
+          <Partners />
         </div>
       </div>
     </section>

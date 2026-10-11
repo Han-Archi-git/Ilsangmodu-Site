@@ -1,4 +1,5 @@
-import { BlogPost, ProjectCategory } from '../types';
+import { BlogPost } from '../types';
+import { resolveProjectCategory } from './projectCategories';
 
 interface RssItem {
   title: string;
@@ -19,25 +20,15 @@ interface RssResponse {
   items: RssItem[];
 }
 
-/**
- * Fetches the latest blog posts from Naver Blog RSS feed.
- * 
- * Note: Naver blocks direct frontend fetch due to CORS. 
- * We use 'https://api.rss2json.com' as a public proxy to convert RSS XML to JSON.
- * This is suitable for a simple portfolio, but for high traffic, a dedicated backend is recommended.
- */
+/** 사이트에 저장한 네이버 RSS 전체 목록을 불러온다. */
 export const fetchNaverBlogPosts = async (blogId: string): Promise<BlogPost[]> => {
   if (!blogId || blogId === 'YOUR_NAVER_ID') {
     return [];
   }
 
-  // Add cache buster to bypass rss2json caching
-  const rssUrl = `https://rss.blog.naver.com/${blogId}?t=${new Date().getTime()}`;
-  // Using api.rss2json.com to parse XML to JSON and bypass CORS
-  const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(`${import.meta.env.BASE_URL}naver-posts.json`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('네이버 글 목록을 가져오지 못했습니다.');
     const data: RssResponse = await response.json();
 
     if (data.status !== 'ok') {
@@ -45,7 +36,10 @@ export const fetchNaverBlogPosts = async (blogId: string): Promise<BlogPost[]> =
       return [];
     }
 
-    return data.items.map((item, index) => {
+    return data.items.flatMap((item, index) => {
+      const categories = item.categories || [];
+      const category = resolveProjectCategory(categories);
+      if (!category) return [];
       // 1. Try to extract image from content if thumbnail field is empty
       let thumbnailUrl = item.thumbnail;
       if (!thumbnailUrl || thumbnailUrl.length === 0) {
@@ -58,28 +52,6 @@ export const fetchNaverBlogPosts = async (blogId: string): Promise<BlogPost[]> =
         }
       }
 
-      // 2. Determine Category: RSS Categories (Priority) > Title Keywords used as fallback
-      let category = ProjectCategory.PLAN;
-      const categories = item.categories || [];
-      const titleLower = item.title.toLowerCase();
-
-      // Priority 1: Check RSS Categories (Most accurate from Naver Blog)
-      if (categories.some(c => c.includes('공사') || c.includes('시공') || c.includes('현장'))) {
-        category = ProjectCategory.CONSTRUCTION;
-      } else if (categories.some(c => c.includes('완공') || c.includes('준공') || c.includes('실적'))) {
-        category = ProjectCategory.COMPLETED;
-      } else if (categories.some(c => c.includes('계획') || c.includes('설계') || c.includes('제안') || c.includes('프로젝트'))) {
-        category = ProjectCategory.PLAN;
-      }
-      // Priority 2: Fallback to Title keywords if RSS category is ambiguous or missing
-      else if (titleLower.includes('공사') || titleLower.includes('현장') || titleLower.includes('착공') || titleLower.includes('시공')) {
-        category = ProjectCategory.CONSTRUCTION;
-      } else if (titleLower.includes('완공') || titleLower.includes('준공') || titleLower.includes('입주') || titleLower.includes('사용승인')) {
-        category = ProjectCategory.COMPLETED;
-      } else if (titleLower.includes('계획') || titleLower.includes('설계') || titleLower.includes('제안') || titleLower.includes('test')) {
-        category = ProjectCategory.PLAN;
-      }
-
       // 3. Clean up summary (remove HTML tags)
       const cleanSummary = item.description.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...';
 
@@ -87,8 +59,8 @@ export const fetchNaverBlogPosts = async (blogId: string): Promise<BlogPost[]> =
       const dateObj = new Date(item.pubDate);
       const formattedDate = `${dateObj.getFullYear()}.${String(dateObj.getMonth() + 1).padStart(2, '0')}.${String(dateObj.getDate()).padStart(2, '0')}`;
 
-      return {
-        id: `naver-${index}`,
+      return [{
+        id: item.guid || item.link || `naver-${index}`,
         title: item.title,
         summary: cleanSummary,
         content: item.description, // RSS content usually contains full HTML
@@ -98,7 +70,7 @@ export const fetchNaverBlogPosts = async (blogId: string): Promise<BlogPost[]> =
         category: category,
         naverUrl: item.link,
         tags: categories.length > 0 ? categories : ['NAVER BLOG'],
-      };
+      }];
     });
 
   } catch (error) {

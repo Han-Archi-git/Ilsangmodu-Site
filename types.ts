@@ -3,6 +3,8 @@ export enum ProjectCategory {
   RESIDENTIAL = 'RESIDENTIAL',
   COMMERCIAL = 'COMMERCIAL',
   OFFICE = 'OFFICE',
+  ON_SITE = 'ON SITE',
+  MAINTENANCE = 'MAINTENANCE',
 }
 
 export interface BlogPost {

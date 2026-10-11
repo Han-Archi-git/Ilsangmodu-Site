@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { BlogPost } from '../types';
+import { BlogPost, ProjectCategory } from '../types';
+import { filterProjectPosts } from '../services/projectCategories';
 import ProjectModal from './ProjectModal';
 
 interface ProjectGridProps {
@@ -9,29 +10,20 @@ interface ProjectGridProps {
 
 const ProjectGrid: React.FC<ProjectGridProps> = ({ posts }) => {
   const [filter, setFilter] = useState('ALL');
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(posts || []);
+  const filteredPosts = useMemo(() => filterProjectPosts(posts || [], filter), [posts, filter]);
   const [visibleCount, setVisibleCount] = useState(8);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
-  // When filter or posts change, update filteredPosts and reset visible count
+  // 메뉴를 바꾸거나 새 글이 들어오면 처음 여덟 개부터 표시한다.
   useEffect(() => {
     setVisibleCount(8);
-    if (!posts) {
-      setFilteredPosts([]);
-      return;
-    }
-    if (filter === 'ALL') {
-      setFilteredPosts(posts);
-    } else {
-      setFilteredPosts(posts.filter(post => post.category === filter));
-    }
   }, [posts, filter]);
 
   const handleLoadMore = () => {
     setVisibleCount(prev => prev + 4);
   };
 
-  const categories = ['ALL', 'ARCHITECTURE', 'RESIDENTIAL', 'COMMERCIAL', 'OFFICE'];
+  const categories = ['ALL', ...Object.values(ProjectCategory)];
 
   return (
     <section id="projects" className="py-24 bg-white text-neutral-900 border-t border-neutral-100">
